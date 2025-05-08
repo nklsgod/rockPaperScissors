@@ -3,9 +3,20 @@
 let humanScore = 0;
 let computerScore = 0;
 
+function playGame(rounds) {
+  for (let i = 0; i < rounds; i++) {
+    const humanSelection = getHumanChoice();
+    const computerSelection = getComputerChoice();
+
+    playRound(humanSelection, computerSelection);
+  }
+  getWinner();
+}
+
+playGame(5);
 function playRound(humanChoice, computerChoice) {
   if (humanChoice === computerChoice) {
-    console.log(`This game is a draw you both have${humanChoice}`);
+    console.log(`This game is a draw you both have ${humanChoice}`);
   } else if (humanChoice === "rock" && computerChoice === "scissors") {
     console.log("Player Won. Rock beats scissors");
     humanScore++;
@@ -26,10 +37,6 @@ function playRound(humanChoice, computerChoice) {
     humanScore++;
   }
 }
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection);
 
 function getComputerChoice() {
   let randomizer = Math.floor(Math.random() * 3);
@@ -51,5 +58,13 @@ function getHumanChoice() {
     return "paper";
   } else {
     return "scissors";
+  }
+}
+
+function getWinner() {
+  if (humanScore > computerScore) {
+    console.log(`You won with ${humanScore} to ${computerScore}`);
+  } else {
+    console.log(`You lost with ${humanScore} to ${computerScore}`);
   }
 }
